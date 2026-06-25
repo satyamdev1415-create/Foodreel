@@ -1,3 +1,27 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .forms import VendorForm
 
-# Create your views here.
+def vendor_register(request):
+
+    if request.method == "POST":
+
+        form = VendorForm(request.POST)
+
+        if form.is_valid():
+
+            vendor = form.save(commit=False)
+
+            vendor.owner = request.user
+
+            vendor.save()
+
+            return redirect('profile')
+
+    else:
+        form = VendorForm()
+
+    return render(
+        request,
+        'vendors/register_vendor.html',
+        {'form': form}
+    )
