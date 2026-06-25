@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from .forms import VendorForm
+from .models import Vendor
+
+from django.contrib.auth.decorators import login_required
 
 def vendor_register(request):
 
@@ -24,4 +27,21 @@ def vendor_register(request):
         request,
         'vendors/register_vendor.html',
         {'form': form}
+    )
+
+@login_required
+def vendor_dashboard(request):
+
+    vendor = Vendor.objects.get(
+        owner=request.user
+    )
+
+    context = {
+        'vendor': vendor
+    }
+
+    return render(
+        request,
+        'vendors/dashboard.html',
+        context
     )

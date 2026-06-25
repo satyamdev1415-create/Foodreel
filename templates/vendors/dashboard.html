@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Vendor Dashboard</h1>
+
+<hr>
+
+<h3>
+Shop :
+{{ vendor.shop_name }}
+</h3>
+
+<p>
+Owner :
+{{ vendor.owner.username }}
+</p>
+
+<p>
+Phone :
+{{ vendor.phone }}
+</p>
+
+<p>
+Status :
+{{ vendor.status }}
+</p>
+
+<p>
+Address :
+{{ vendor.address }}
+</p>
+
+<hr>
+
+<h2>Statistics</h2>
+
+<div>
+
+<h3>
+Products : 0
+</h3>
+
+<h3>
+Reels : 0
+</h3>
+
+<h3>
+Orders : 0
+</h3>
+
+</div>
+
+{% endblock %}
