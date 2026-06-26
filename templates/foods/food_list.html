@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Foods</h2>
+
+<table border="1">
+
+<tr>
+
+<th>Name</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Status</th>
+
+</tr>
+
+{% for food in foods %}
+
+<tr>
+
+<td>{{ food.name }}</td>
+
+<td>{{ food.category }}</td>
+
+<td>₹{{ food.price }}</td>
+
+<td>{{ food.is_available }}</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}
