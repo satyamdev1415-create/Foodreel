@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 
 from vendors.models import Vendor
@@ -41,4 +41,51 @@ def food_list(request):
         request,
         "foods/food_list.html",
         {"foods": foods}
+    )
+
+
+@login_required
+def update_food(request,pk):
+    vendor = Vendor.objects.get(owner=request.user)
+    food = get_object_or_404(
+        FoodItem,
+        id=pk,
+        vendor=vendor
+    )
+
+    form = FoodForm(
+        request.POST or None,
+        request.FILES or None,
+        instance=food
+    )
+
+    if form.is_valid():
+        form.save()
+
+        return redirect("food-list")
+
+    return render(request,  "foods/update_food.html",{"form": form})
+
+
+@login_required
+def delete_food(request, pk):
+
+    vendor = Vendor.objects.get(owner=request.user)
+
+    food = get_object_or_404(
+        FoodItem,
+        id=pk,
+        vendor=vendor
+    )
+
+    if request.method == "POST":
+
+        food.delete()
+
+        return redirect("food-list")
+
+    return render(
+        request,
+        "foods/delete_food.html",
+        {"food": food}
     )

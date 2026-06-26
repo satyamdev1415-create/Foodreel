@@ -14,4 +14,16 @@ urlpatterns = [
         food_list,
         name="food-list"
     ),
+
+    path(
+       "update/<int:pk>/",
+        update_food,
+        name="update-food"
+    ),
+
+    path(
+       "delete/<int:pk>/",
+        delete_food,
+        name="delete-food"
+    ),
 ]
