@@ -3,31 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>FoodReels</title>
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark">
+<!-- Navbar Start -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
     <div class="container">
 
-        <a class="navbar-brand" href="#">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold" href="/">
             🍔 FoodReels
         </a>
 
+        <!-- Mobile Button -->
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbar">
+
+            <span class="navbar-toggler-icon"></span>
+
+        </button>
+
+        <!-- Navbar Menu -->
+        <div class="collapse navbar-collapse" id="navbar">
+
+            <!-- Left Menu -->
+            <ul class="navbar-nav me-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'vendor-dashboard' %}">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'food-list' %}">
+                        My Foods
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'add-food' %}">
+                        Add Food
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- Right Menu -->
+            <ul class="navbar-nav">
+
+                {% if request.user.is_authenticated %}
+
+                <li class="nav-item">
+                    <span class="navbar-text me-3">
+                        👋 {{ request.user.username }}
+                    </span>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}"
+                       class="btn btn-danger btn-sm">
+                        Logout
+                    </a>
+                </li>
+
+                {% else %}
+
+                <li class="nav-item me-2">
+                    <a href="{% url 'login' %}"
+                       class="btn btn-outline-light btn-sm">
+                        Login
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{% url 'register' %}"
+                       class="btn btn-warning btn-sm">
+                        Register
+                    </a>
+                </li>
+
+                {% endif %}
+
+            </ul>
+
+        </div>
+
     </div>
 </nav>
+<!-- Navbar End -->
+
 
 <div class="container mt-4">
 
-{% block content %}
+    {% block content %}
 
-{% endblock %}
+    {% endblock %}
 
 </div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

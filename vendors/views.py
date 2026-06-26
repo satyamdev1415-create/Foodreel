@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import VendorForm
 from .models import Vendor
+from foods.models import FoodItem
 
 from django.contrib.auth.decorators import login_required
 
@@ -32,16 +33,31 @@ def vendor_register(request):
 @login_required
 def vendor_dashboard(request):
 
-    vendor = Vendor.objects.get(
+    vendor = get_object_or_404(
+        Vendor,
         owner=request.user
     )
 
+    total_products = FoodItem.objects.filter(
+        vendor=vendor
+    ).count()
+
     context = {
-        'vendor': vendor
+
+        "vendor": vendor,
+
+        "total_products": total_products,
+
+        "total_reels": 0,
+
+        "total_orders": 0,
+
+        "total_revenue": 0,
+
     }
 
     return render(
         request,
-        'vendors/dashboard.html',
+        "vendors/dashboard.html",
         context
     )

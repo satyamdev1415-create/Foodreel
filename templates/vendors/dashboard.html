@@ -1,65 +1,153 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block content %}
 
-<h1>Vendor Dashboard</h1>
+<h2 class="mb-4">
 
-<hr>
+Vendor Dashboard
 
-<a href="{% url 'add-food' %}">
-Add Food
-</a>
+</h2>
 
-<br><br>
+<div class="row">
 
-<a href="{% url 'food-list' %}">
-My Foods
-</a>
+<div class="col-md-3">
 
+<div class="card bg-primary text-white">
 
-<h3>
-Shop :
-{{ vendor.shop_name }}
-</h3>
+<div class="card-body">
 
-<p>
-Owner :
-{{ vendor.owner.username }}
-</p>
+<h5>Total Products</h5>
 
-<p>
-Phone :
-{{ vendor.phone }}
-</p>
-
-<p>
-Status :
-{{ vendor.status }}
-</p>
-
-<p>
-Address :
-{{ vendor.address }}
-</p>
-
-<hr>
-
-<h2>Statistics</h2>
-
-<div>
-
-<h3>
-Products : 0
-</h3>
-
-<h3>
-Reels : 0
-</h3>
-
-<h3>
-Orders : 0
-</h3>
+<h2>{{ total_products }}</h2>
 
 </div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-success text-white">
+
+<div class="card-body">
+
+<h5>Total Reels</h5>
+
+<h2>{{ total_reels }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-warning">
+
+<div class="card-body">
+
+<h5>Orders</h5>
+
+<h2>{{ total_orders }}</h2>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-3">
+
+<div class="card bg-dark text-white">
+
+<div class="card-body">
+
+<h5>Revenue</h5>
+
+<h2>
+
+₹{{ total_revenue }}
+
+</h2>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<hr>
+
+<h4>
+
+{{ vendor.shop_name }}
+
+</h4>
+
+<p>
+
+Owner :
+
+{{ vendor.owner.username }}
+
+</p>
+
+<p>
+
+Phone :
+
+{{ vendor.phone }}
+
+</p>
+
+<p>
+
+Status :
+
+{% if vendor.status == "approved" %}
+
+<span class="badge bg-success">
+
+Approved
+
+</span>
+
+{% elif vendor.status == "pending" %}
+
+<span class="badge bg-warning">
+
+Pending
+
+</span>
+
+{% else %}
+
+<span class="badge bg-danger">
+
+Rejected
+
+</span>
+
+{% endif %}
+
+</p>
+
+<hr>
+
+<a href="{% url 'food-list' %}" class="btn btn-primary">
+
+Manage Foods
+
+</a>
+
+<a href="{% url 'add-food' %}" class="btn btn-success">
+
+Add Food
+
+</a>
 
 {% endblock %}
