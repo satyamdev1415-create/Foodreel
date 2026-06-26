@@ -26,4 +26,5 @@ urlpatterns = [
         delete_food,
         name="delete-food"
     ),
+    path("",home, name="home"),
 ]

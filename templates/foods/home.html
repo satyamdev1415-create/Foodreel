@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+Search Food
+
+</h2>
+
+<form>
+
+<div class="input-group mb-5">
+
+<input
+type="text"
+class="form-control"
+placeholder="Search Food">
+
+<button
+class="btn btn-primary">
+
+Search
+
+</button>
+
+</div>
+
+</form>
+
+<h2>
+
+Categories
+
+</h2>
+
+<div class="row">
+
+{% for category in categories %}
+
+<div class="col-md-3 mb-3">
+
+<div class="card">
+
+<img
+src="{{ category.image.url }}"
+height="180"
+class="card-img-top">
+
+<div class="card-body">
+
+<h5>
+
+{{ category.name }}
+
+</h5>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<hr>
+
+<h2>
+
+Latest Foods
+
+</h2>
+
+<div class="row">
+
+{% for food in foods %}
+
+<div class="col-md-4">
+
+<div class="card mb-4 shadow">
+
+<img
+src="{{ food.image.url }}"
+height="220"
+class="card-img-top">
+
+<div class="card-body">
+
+<h5>
+
+{{ food.name }}
+
+</h5>
+
+<p>
+
+{{ food.category }}
+
+</p>
+
+<h4>
+
+₹{{ food.price }}
+
+</h4>
+
+<button
+class="btn btn-success">
+
+View
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

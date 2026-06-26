@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from vendors.models import Vendor
 from .forms import FoodForm
-from .models import FoodItem
+from .models import FoodItem , Category
 
 
 @login_required
@@ -88,4 +88,27 @@ def delete_food(request, pk):
         request,
         "foods/delete_food.html",
         {"food": food}
+    )
+
+
+def home(request):
+
+    categories = Category.objects.all()
+
+    foods = FoodItem.objects.filter(
+        is_available=True
+    ).order_by("-created_at")
+
+    context = {
+
+        "categories": categories,
+
+        "foods": foods,
+
+    }
+
+    return render(
+        request,
+        "foods/home.html",
+        context
     )
