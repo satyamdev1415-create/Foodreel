@@ -30,6 +30,7 @@ def vendor_register(request):
         {'form': form}
     )
 
+
 @login_required
 def vendor_dashboard(request):
 

@@ -20,7 +20,7 @@ placeholder="Search Food">
 <button
 class="btn btn-primary">
 
-Search
+Search 
 
 </button>
 
@@ -106,12 +106,7 @@ class="card-img-top">
 
 </h4>
 
-<button
-class="btn btn-success">
-
-View
-
-</button>
+<a href="{% url 'food-detail' food.id %}" class="btn btn-success"> View Details </a>
 
 </div>
 

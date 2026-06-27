@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <img src="{{ food.image.url }}"
+             class="img-fluid rounded shadow">
+
+    </div>
+
+    <div class="col-md-6">
+
+        <h2>{{ food.name }}</h2>
+
+        <h4 class="text-success">
+            ₹{{ food.price }}
+        </h4>
+
+        <p>
+            <strong>Category:</strong>
+            {{ food.category.name }}
+        </p>
+
+        <p>
+            <strong>Vendor:</strong>
+            {{ food.vendor.shop_name }}
+        </p>
+
+        <p>
+            {{ food.description }}
+        </p>
+
+        <button class="btn btn-primary">
+            Add To Cart
+        </button>
+
+        <button class="btn btn-success">
+            Buy Now
+        </button>
+
+    </div>
+
+</div>
+
+<hr>
+
+<h3>Related Foods</h3>
+
+<div class="row">
+
+{% for item in related_foods %}
+
+<div class="col-md-3">
+
+    <div class="card mb-3">
+
+        <img src="{{ item.image.url }}"
+             class="card-img-top"
+             height="180">
+
+        <div class="card-body">
+
+            <h5>{{ item.name }}</h5>
+
+            <p>₹{{ item.price }}</p>
+
+            <a href="{% url 'food-detail' item.id %}"
+               class="btn btn-outline-primary btn-sm">
+
+                View
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

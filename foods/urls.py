@@ -27,4 +27,6 @@ urlpatterns = [
         name="delete-food"
     ),
     path("",home, name="home"),
+
+    path('detail/<int:pk>/',food_detail,name="food-detail"),
 ]

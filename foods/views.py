@@ -112,3 +112,23 @@ def home(request):
         "foods/home.html",
         context
     )
+
+def food_detail(request,pk):
+    food = get_object_or_404(
+        FoodItem,
+        id=pk,
+        is_available = True
+    )
+
+    related_foods = FoodItem.objects.filter(
+        category= food.category,
+        is_available=True
+    ).exclude(id=food.id)[:4]
+
+
+    context = {
+        "food":food,
+        "related_food" : related_foods,
+    }
+
+    return render(request, "foods/food_detail.html",context)
