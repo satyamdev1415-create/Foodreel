@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+My Addresses
+
+</h2>
+
+<a
+href="{% url 'add-address' %}"
+class="btn btn-primary mb-3">
+
+Add Address
+
+</a>
+
+{% for address in addresses %}
+
+<div class="card mb-3">
+
+<div class="card-body">
+
+<h5>
+
+{{ address.full_name }}
+
+</h5>
+
+<p>
+
+{{ address.phone }}
+
+</p>
+
+<p>
+
+{{ address.address_line }}
+
+</p>
+
+<p>
+
+{{ address.city }},
+{{ address.state }}
+
+-
+{{ address.pincode }}
+
+</p>
+
+{% if address.is_default %}
+
+<span class="badge bg-success">
+
+Default Address
+
+</span>
+
+{% endif %}
+
+</div>
+
+</div>
+
+{% empty %}
+
+<p>
+
+No Address Found
+
+</p>
+
+{% endfor %}
+
+{% endblock %}
