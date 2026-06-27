@@ -43,3 +43,29 @@ def remove_cart(request, pk):
     item.delete()
 
     return render("cart-list")
+
+
+@login_required
+def increase_quantity(request, pk):
+    cart_item = get_object_or_404(
+        Cart,
+        id=pk,
+        user=request.user
+    )
+    cart_item.quantity += 1
+    cart_item.save()
+    return redirect("cart-list")
+
+@login_required
+def decrease_quantity(request, pk):
+    cart_item = get_object_or_404(
+        Cart,
+        id=pk,
+        user=request.user
+    )
+
+    if cart_item.quantity > 1:
+        cart_item.quantity -= 1
+        cart_item.save()
+
+    return redirect("cart-list")
