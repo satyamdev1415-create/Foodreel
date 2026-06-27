@@ -33,9 +33,7 @@
             {{ food.description }}
         </p>
 
-        <button class="btn btn-primary">
-            Add To Cart
-        </button>
+        <a href="{% url 'add-cart' food.id %}" class="btn btn-primary">Add To Cart</a>
 
         <button class="btn btn-success">
             Buy Now

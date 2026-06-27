@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>My Cart</h2>
+
+<table class="table table-bordered">
+
+<tr>
+
+<th>Food</th>
+
+<th>Price</th>
+
+<th>Qty</th>
+
+<th>Total</th>
+
+<th>Action</th>
+
+</tr>
+
+{% for item in cart_items %}
+
+<tr>
+
+<td>{{ item.food.name }}</td>
+
+<td>₹{{ item.food.price }}</td>
+
+<td>{{ item.quantity }}</td>
+
+<td>₹{{ item.total_price }}</td>
+
+<td>
+
+<a href="{% url 'remove-cart' item.id %}"
+class="btn btn-danger btn-sm">
+
+Remove
+
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<h3>
+
+Grand Total : ₹{{ total }}
+
+</h3>
+
+{% endblock %}
