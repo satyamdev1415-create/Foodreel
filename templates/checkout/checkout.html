@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Checkout</h2>
+
+<div class="row">
+
+    <!-- Left Side -->
+    <div class="col-md-8">
+
+        <div class="card mb-4">
+
+            <div class="card-header">
+
+                <h4>Delivery Address</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                {% if address %}
+
+                    <h5>{{ address.full_name }}</h5>
+
+                    <p>{{ address.phone }}</p>
+
+                    <p>{{ address.address_line }}</p>
+
+                    <p>{{ address.city }}, {{ address.state }}</p>
+
+                    <p>{{ address.pincode }}</p>
+
+                {% else %}
+
+                    <div class="alert alert-warning">
+
+                        No Default Address Found.
+
+                    </div>
+
+                    <a href="{% url 'add-address' %}"
+                       class="btn btn-primary">
+
+                        Add Address
+
+                    </a>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <div class="card">
+
+            <div class="card-header">
+
+                <h4>Payment Method</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                <div class="form-check">
+
+                    <input
+                    class="form-check-input"
+                    type="radio"
+                    checked>
+
+                    <label class="form-check-label">
+
+                        Cash On Delivery
+
+                    </label>
+
+                </div>
+
+                <div class="form-check mt-2">
+
+                    <input
+                    class="form-check-input"
+                    type="radio">
+
+                    <label class="form-check-label">
+
+                        Online Payment
+                        <span class="text-danger">
+                            (Coming Soon)
+                        </span>
+
+                    </label>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Right Side -->
+
+    <div class="col-md-4">
+
+        <div class="card">
+
+            <div class="card-header bg-dark text-white">
+
+                <h4>Order Summary</h4>
+
+            </div>
+
+            <div class="card-body">
+
+                {% for item in cart_items %}
+
+                    <p>
+
+                        {{ item.food.name }}
+
+                        ×
+
+                        {{ item.quantity }}
+
+                    </p>
+
+                {% endfor %}
+
+                <hr>
+
+                <h4>
+
+                    Total : ₹{{ total }}
+
+                </h4>
+
+                <a href="#"
+                   class="btn btn-success w-100 mt-3">
+
+                    Place Order
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -27,7 +27,11 @@ urlpatterns = [
     path('',include('foods.urls')),
     path('cart/',include('cart.urls')),
     path("addresses/",include("addresses.urls")),
+    path("checkout/",include("checkout.urls")),
 ]
+
+
+
 
 if settings.DEBUG:
     urlpatterns += static(
