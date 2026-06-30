@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from cart.models import Cart
 from addresses.models import Address
 from .models import Order, OrderItem
+from django.contrib import messages
 
 
 @login_required
@@ -83,3 +84,79 @@ def order_detail(request, pk):
             "order":order
         }
     )
+
+
+
+
+@login_required
+def vendor_orders(request):
+
+    orders = Order.objects.filter(
+        items__food__vendor=request.user.vendor
+    ).distinct().order_by("-created_at")
+
+    return render(
+        request,
+        "orders/vendor_orders.html",
+        {
+            "orders": orders
+        }
+    )
+
+
+
+@login_required
+def vendor_order_detail(request, pk):
+
+    order = get_object_or_404(
+        Order,
+        id=pk,
+        items__food__vendor=request.user.vendor
+    )
+
+    return render(
+        request,
+        "orders/vendor_order_detail.html",
+        {
+            "order": order
+        }
+    )
+
+
+
+
+
+@login_required
+def update_order_status(request, pk, status):
+
+    order = get_object_or_404(
+        Order,
+        id=pk,
+        items__food__vendor=request.user.vendor
+    )
+
+    valid_status = [
+        "Pending",
+        "Accepted",
+        "Preparing",
+        "Delivered",
+        "Cancelled",
+    ]
+
+    if status in valid_status:
+
+        order.status = status
+        order.save()
+
+        messages.success(
+            request,
+            f"Order #{order.id} updated to {status}"
+        )
+
+    else:
+        messages.error(
+            request,
+            "Invalid Status"
+        )
+
+    return redirect("vendor-orders")

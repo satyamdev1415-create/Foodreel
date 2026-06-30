@@ -29,6 +29,7 @@ urlpatterns = [
     path("addresses/",include("addresses.urls")),
     path("checkout/",include("checkout.urls")),
     path("orders/",include("orders.urls")),
+    path("reels/",include("reels.urls"))
 ]
 
 

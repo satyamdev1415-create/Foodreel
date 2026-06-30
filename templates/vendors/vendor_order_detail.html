@@ -1,0 +1,38 @@
+<td>
+
+<a href="{% url 'vendor-order-detail' order.id %}"
+class="btn btn-dark btn-sm">
+
+View
+
+</a>
+
+<a href="{% url 'update-order-status' order.id 'Accepted' %}"
+class="btn btn-primary btn-sm">
+
+Accept
+
+</a>
+
+<a href="{% url 'update-order-status' order.id 'Preparing' %}"
+class="btn btn-info btn-sm">
+
+Preparing
+
+</a>
+
+<a href="{% url 'update-order-status' order.id 'Delivered' %}"
+class="btn btn-success btn-sm">
+
+Delivered
+
+</a>
+
+<a href="{% url 'update-order-status' order.id 'Cancelled' %}"
+class="btn btn-danger btn-sm">
+
+Cancel
+
+</a>
+
+</td>

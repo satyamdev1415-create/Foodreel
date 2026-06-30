@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">
+
+🍔 Food Reels
+
+</h2>
+
+<div class="row">
+
+{% for reel in reels %}
+
+<div class="col-md-4 mb-4">
+
+<div class="card">
+
+<video controls width="100%">
+
+<source src="{{ reel.video.url }}" type="video/mp4">
+
+</video>
+
+<div class="card-body">
+
+<h5>{{ reel.title }}</h5>
+
+<p>{{ reel.caption }}</p>
+
+<p>
+
+<strong>{{ reel.food.name }}</strong>
+
+</p>
+
+<a href="{% url 'food-detail' reel.food.id %}"
+class="btn btn-primary">
+
+Buy Now
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% empty %}
+
+<h4>No Reels Uploaded Yet.</h4>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}
