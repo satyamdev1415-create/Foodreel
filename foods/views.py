@@ -27,7 +27,7 @@ def add_food(request):
 
     else:
         form = FoodForm()
-
+ 
     return render(request, "foods/add_food.html", {"form": form})
 
 @login_required
